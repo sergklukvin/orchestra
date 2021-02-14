@@ -25,8 +25,8 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
   },
   btnSubmit: {
-    cursor: 'pointer'
-  }
+    cursor: 'pointer',
+  },
 }));
 
 export default function MultilineTextFields(props) {
@@ -58,7 +58,13 @@ export default function MultilineTextFields(props) {
         );
     } else {
       getAllBooks()
-        .then((res) => (curId = res.data[res.data.length - 1].id + 1))
+        .then((res) => {
+          if (res.data.length === 0) {
+            curId = 1;
+          } else {
+            curId = res.data[res.data.length - 1].id + 1;
+          }
+        })
         .then(
           createBook({
             id: curId,
@@ -69,12 +75,12 @@ export default function MultilineTextFields(props) {
           })
         )
         .then(() => showAlert('success', 'Create success'))
-        .catch(() => showAlert('success', 'Create success'))
+        .catch(() => showAlert('error', 'Create error'))
         .then(
           setTimeout(() => {
             setRedirect(true);
           }, 1000)
-        )
+        );
     }
   };
 
