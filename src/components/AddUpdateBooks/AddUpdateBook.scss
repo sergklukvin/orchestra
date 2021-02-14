@@ -1,0 +1,10 @@
+.input-control {
+  display: grid;
+  grid-row-gap: 5px;
+  grid-auto-rows: max-content;
+}
+  
+.error {
+  color: red;
+  font-size: 12px;
+}
